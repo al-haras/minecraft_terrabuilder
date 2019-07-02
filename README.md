@@ -71,11 +71,11 @@ $ ./buildserverarm.sh
 For people using Windows, this also contains a PowerShell script that will also install Terraform. It works the same as the Linux version and will provision your AWS infrastructure and pass the bootstrap to your EC2 instance to build the server. You will need to have ssh-keygen installed on your PC as well as being logged into an account that is a member of the Local Administrator group.
 
 ```
-cd /minecraft_terrabuilder
+cd \minecraft_terrabuilder
 ```
 
 ```
-./buildserverwindows.ps1
+.\buildserverwindows.ps1
 ```
 
 Alternatively, you can browse to the cloned repository and right click to run in PowerShell.
