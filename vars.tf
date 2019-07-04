@@ -1,31 +1,13 @@
-# Access Key - AWS User "terraform"
-variable "access_key" {
-description = "AWS access key"
-default = "Your Access Key"
-}
-
-# Secret Key - AWS User "terraform"
-variable "secret_key" {
-description = "AWS secret key"
-default = "Your Secret Key"
-}
-
 # Define Region
 variable "region" {
-description = "AWS region you want the infrastructure to be created in"
-default = "us-east-1"
+  description = "AWS region you want the infrastructure to be created in"
+  default = "us-west-1"
 }
 
 # Private Key
 variable "key_path_private" {
-description = "Private SSH key"
-default = "minecraftkey"
-}
-
-# Public Key
-variable "key_path_public" {
-description = "Public SSH key"
-default = "minecraftkey.pub"
+  description = "Private SSH key"
+  default = "minecraftkey"
 }
 
 # Define VPC CIDR Range
@@ -47,9 +29,9 @@ default = "0.0.0.0/0"
 }
 
 # Your Public IP address, used for locking down SSH to a single public IP address (which may be set to 0.0.0.0/0 if you don't want to limit this)
-variable "ssh_lock" {
-description = "Used to lock down ssh to single Public IP address"
-default = "Your Public IP/32"
+variable "ssh_cidr_block" {
+  description = "Used to lock down ssh to single Public IP address"
+  default = "76.21.60.212/32" # "Your Public IP/32"
 }
 
 # AMI selection (Debian, however you can modify the bootstrap to use which ever distro you prefer)

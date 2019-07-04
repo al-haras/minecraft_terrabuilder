@@ -1,6 +1,5 @@
 #!/bin/bash
 apt-get update -y
-apt-get update -y
 apt-get install git -y
 apt-get install openjdk-8-jre-headless -y
 password="minecraft"
