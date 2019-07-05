@@ -1,20 +1,18 @@
 #!/bin/bash
-apt-get update -y
-apt-get install git -y
-apt-get install openjdk-8-jre-headless -y
-password="minecraft"
-echo -e "$password\n$password\n" | passwd admin
-su admin -c 'mkdir /home/admin/build'
-cd /home/admin/build
-su admin -c 'wget https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar'
-su admin -c 'java -Xms1G -Xmx1G -jar BuildTools.jar --rev 1.14.3 nogui'
-su admin -c 'mkdir /home/admin/server'
-su admin -c 'mv /home/admin/build/spigot-1*.jar /home/admin/server/spigot.jar'
-cd /home/admin/server
-su admin -c 'java -Xms1G -Xms1G -jar spigot.jar'
+
+# Wait for apt lock
+while fuser /var/{lib/{dpkg,apt/lists},cache/apt/archives}/lock >/dev/null 2>&1; do
+  echo "Waiting for apt lock..."
+  sleep 1
+done
+
+apt-get update -y && \
+  apt-get install -y openjdk-8-jre-headless screen
+
+wget -O server.jar https://launcher.mojang.com/v1/objects/d0d0fe2b1dc6ab4c65554cb734270872b72dadd6/server.jar
+
+# Agree to EULA
 echo "eula=true" > eula.txt
-su admin -c 'sudo killall -9 java'
-su admin -c 'java -Xms2G -Xmx2G -jar spigot.jar'
-su admin -c 'sudo killall -9 java'
-su admin -c 'sudo killall -9 java'
-su admin -c 'java -Xms2G -Xmx2G -jar spigot.jar'
+
+# Start the minecraft server
+java -Xmx1024M -Xms1024M -jar server.jar nogui
